@@ -1,4 +1,3 @@
-# apexzenith_ui_final_v2.py - Immortal AI Daemon UI with Advanced Features
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -76,8 +75,9 @@ if choice == "Overview":
         status_color_map = {"Healthy": "#0F0", "Warning": "#FFD700", "Critical": "#FF0000"}
         status = st.selectbox("Simulate System Status:", options=status_color_map.keys())
         matrix_color = status_color_map[status]
-
-        components.html(f\"\"\"
+        
+        # FIX: Removed the incorrect backslash before the triple quotes
+        components.html(f'''
         <div style='background:black;padding:10px;border-radius:12px;'>
           <canvas id='matrix' width='800' height='300'></canvas>
           <script>
@@ -103,7 +103,7 @@ if choice == "Overview":
             setInterval(draw, 40);
           </script>
         </div>
-        \"\"\", height=320)
+        ''', height=320)
 
         st.markdown("### 🧬 Self-Evolving Agent Lineage")
         st.graphviz_chart(generate_lineage_graph(st.session_state.ai_version))
