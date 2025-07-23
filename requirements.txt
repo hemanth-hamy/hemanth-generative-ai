@@ -12,3 +12,4 @@ pandas
 plotly
 graphviz
 pyngrok
+python-multipart
