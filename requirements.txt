@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-jose[cryptography]
+passlib[bcrypt]
+pycryptodome
+requests
+ntfy
+SpeechRecognition
+pydub
+streamlit
+pandas
+plotly
+graphviz
+pyngrok
