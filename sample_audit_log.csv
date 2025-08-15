@@ -1,6 +1,0 @@
-timestamp,event,user,details
-2025-08-15T10:00:00Z,login,alice,successful login
-2025-08-15T10:01:00Z,file_upload,alice,uploaded invoice.pdf
-2025-08-15T10:02:00Z,logout,alice,user logged out
-2025-08-15T10:05:00Z,login,bob,successful login
-2025-08-15T10:06:00Z,query,bob,ran universal search for "sales"
