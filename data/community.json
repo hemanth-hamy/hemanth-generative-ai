@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Shweta",
+        "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=shweta",
+        "city": "Mumbai",
+        "country": "India",
+        "about": "NFT artist & twin creator"
+    },
+    {
+        "name": "Elon",
+        "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=elon",
+        "city": "Austin",
+        "country": "USA",
+        "about": "3D digital twin dev"
+    },
+    {
+        "name": "Aliya",
+        "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=aliya",
+        "city": "Istanbul",
+        "country": "Turkey",
+        "about": "AI file converter & marketplace champ"
+    }
+]
