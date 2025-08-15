@@ -2,3 +2,5 @@ streamlit
 streamlit-javascript
 Pillow
 openai
+youtube-transcript-api
+pyvis
