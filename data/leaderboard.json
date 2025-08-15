@@ -1,0 +1,20 @@
+[
+    {
+        "rank": 1,
+        "name": "Hemanth",
+        "score": 10250,
+        "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=hemanth"
+    },
+    {
+        "rank": 2,
+        "name": "Vēda AI",
+        "score": 9950,
+        "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=veda"
+    },
+    {
+        "rank": 3,
+        "name": "Cosmic Creator",
+        "score": 9250,
+        "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=cosmos"
+    }
+]

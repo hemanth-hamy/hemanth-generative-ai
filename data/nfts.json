@@ -1,0 +1,20 @@
+[
+    {
+        "img": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+        "name": "Cosmic Tiger",
+        "artist": "Hemanth",
+        "price": "0.11 ETH"
+    },
+    {
+        "img": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+        "name": "Galactic Orb",
+        "artist": "Vēda AI",
+        "price": "0.18 ETH"
+    },
+    {
+        "img": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
+        "name": "Quantum City",
+        "artist": "Cosmic Creator",
+        "price": "0.29 ETH"
+    }
+]
