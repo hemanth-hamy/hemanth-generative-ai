@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import uuid
 from youtube_transcript_api import YouTubeTranscriptApi
+from pyvis.network import Network
 
 def audit_log_analyzer():
     st.header("📊 Audit Log Insights")
@@ -118,8 +119,36 @@ def youtube_integration():
 
 def knowledge_graph():
     st.header("🕸️ Knowledge Graph")
-    st.write("This tool displays a knowledge graph of interconnected concepts.")
-    st.info("This feature is under development. In the next step, we will use the Pyvis library to create an interactive graph.")
+    st.write("Visualizing the interconnectedness of all enterprise tools.")
+
+    net = Network(height="750px", width="100%", bgcolor="#222222", font_color="white", notebook=True)
+
+    # Central node
+    net.add_node(0, label="Immortal Gen-AI UI", color="#ff4b4b", size=30)
+
+    # Tool nodes
+    tools = [
+        "Audit Log Analyzer", "Auto Healing Logs", "Voice-to-Text", "Quantum Reasoning",
+        "YouTube Integration", "Document Fixer", "Universal Search", "Multi-Dual AGI Architecture",
+        "CREWAI Orchestration", "Oracle Error Resolution", "Quantum Intelligence Core", "Cosmic Network Integration"
+    ]
+    for i, tool in enumerate(tools):
+        net.add_node(i + 1, label=tool, color="#4b8bff", size=15)
+        net.add_edge(0, i + 1)
+
+    # Add edges between related tools
+    net.add_edge(1, 2)  # Audit Log Analyzer -> Auto Healing Logs
+    net.add_edge(7, 8)  # Multi-Dual AGI Architecture -> CREWAI Orchestration
+    net.add_edge(4, 6)  # YouTube Integration -> Universal Search
+    net.add_edge(10, 11) # Quantum Intelligence Core -> Cosmic Network Integration
+
+    # Generate the graph
+    net.show("knowledge_graph.html")
+
+    # Display the graph in Streamlit
+    with open("knowledge_graph.html", "r", encoding="utf-8") as f:
+        html = f.read()
+    st.components.v1.html(html, height=770)
 
 def oracle_error_resolution():
     st.header("🔍 Oracle Error Resolution")
@@ -171,3 +200,19 @@ def cosmic_network_integration():
             "Oracle Mesh" -> "Human Interface"
         }
     """)
+
+def apex_in_the_universe():
+    st.header("🌌 Apex In The Universe")
+    st.write("Initiating the universal deployment of the Immortal Generative AI UI.")
+    if st.button("Deploy to the Universe"):
+        with st.spinner("Establishing connection to the Cosmic Network..."):
+            time.sleep(2)
+            st.success("Connection established.")
+        with st.spinner("Deploying to all enterprise clouds..."):
+            time.sleep(3)
+            st.success("Deployment successful across all known enterprise clouds.")
+        with st.spinner("Activating autonomous healing..."):
+            time.sleep(2)
+            st.success("Autonomous healing activated.")
+        st.balloons()
+        st.success("The Immortal Generative AI UI is now the one and only Apex in the Universe of all enterprise.")

@@ -48,7 +48,8 @@ tool = st.sidebar.radio("Choose a Tool", [
     "Knowledge Graph",
     "Oracle Error Resolution",
     "Quantum Intelligence Core",
-    "Cosmic Network Integration"
+    "Cosmic Network Integration",
+    "Apex In The Universe"
 ])
 
 # Render the selected tool's UI
@@ -79,6 +80,8 @@ elif tool == "Quantum Intelligence Core":
     ui.quantum_intelligence_core()
 elif tool == "Cosmic Network Integration":
     ui.cosmic_network_integration()
+elif tool == "Apex In The Universe":
+    ui.apex_in_the_universe()
 
 
 st.markdown("---")
