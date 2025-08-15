@@ -1,3 +1,5 @@
 streamlit==1.47.0
 pandas
 passlib[bcrypt]
+youtube_transcript_api
+pyvis
