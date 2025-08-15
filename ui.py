@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import uuid
 from youtube_transcript_api import YouTubeTranscriptApi
+from pyvis.network import Network
 
 def audit_log_analyzer():
     st.header("📊 Audit Log Insights")
@@ -54,9 +55,27 @@ def universal_search():
     st.header("🌐 RAG Multi-Source Neural Fetch")
     query = st.text_input("Ask anything across Oracle docs, YouTube, PDFs, etc.")
     if st.button("Search"):
-        st.info("Searching...")
-        time.sleep(2)
-        st.success("Found 87 matching entries from Oracle Docs, 9 videos, and 13 JIRA tickets.")
+        if 'transcripts' in st.session_state and st.session_state.transcripts:
+            with st.spinner("Searching stored YouTube transcripts..."):
+                results = []
+                for video_id, transcript in st.session_state.transcripts.items():
+                    if query.lower() in transcript.lower():
+                        # Find the first occurrence and get a snippet
+                        index = transcript.lower().find(query.lower())
+                        snippet_start = max(0, index - 50)
+                        snippet_end = min(len(transcript), index + len(query) + 50)
+                        snippet = transcript[snippet_start:snippet_end]
+                        results.append((video_id, snippet))
+
+                if results:
+                    st.success(f"Found {len(results)} matching entries in YouTube transcripts.")
+                    for video_id, snippet in results:
+                        with st.expander(f"Match in video: {video_id}"):
+                            st.write(f"...{snippet}...")
+                else:
+                    st.warning("No matches found in the stored YouTube transcripts.")
+        else:
+            st.warning("No YouTube transcripts have been fetched yet. Please use the YouTube Integration tool first.")
 
 def multi_dual_agi_architecture():
     st.header("🏗️ Multi-Dual AGI Architecture")
@@ -106,20 +125,60 @@ def crewai_orchestration():
 
 def youtube_integration():
     st.header("📺 YouTube Integration")
+    if 'transcripts' not in st.session_state:
+        st.session_state.transcripts = {}
+
     url = st.text_input("Enter a YouTube video URL:")
     if st.button("Get Transcript"):
-        try:
-            video_id = url.split("v=")[1]
-            transcript = YouTubeTranscriptApi.get_transcript(video_id)
-            st.text_area("Transcript", " ".join([item['text'] for item in transcript]), height=300)
-            st.success("Transcript fetched successfully.")
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
+        if url:
+            try:
+                video_id = url.split("v=")[1]
+                transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+                transcript = " ".join([item['text'] for item in transcript_list])
+                st.session_state.transcripts[video_id] = transcript
+                st.text_area("Transcript", transcript, height=300)
+                st.success(f"Transcript for video {video_id} fetched and stored.")
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
+        else:
+            st.warning("Please enter a YouTube URL.")
 
 def knowledge_graph():
     st.header("🕸️ Knowledge Graph")
-    st.write("This tool displays a knowledge graph of interconnected concepts.")
-    st.info("This feature is under development. In the next step, we will use the Pyvis library to create an interactive graph.")
+    st.write("Enter concepts and relationships (e.g., 'AGI -> Sentience') to build a knowledge graph.")
+
+    if 'graph_data' not in st.session_state:
+        st.session_state.graph_data = "Cosmic Engine -> Quantum Core\nQuantum Core -> AGI\nAGI -> Oracle Mesh"
+
+    graph_input = st.text_area("Graph Data:", st.session_state.graph_data, height=150)
+    st.session_state.graph_data = graph_input
+
+    if st.button("Generate Graph"):
+        net = Network(height="500px", width="100%", bgcolor="#0f2027", font_color="white", notebook=True)
+
+        nodes = set()
+        edges = []
+        for line in graph_input.strip().split('\n'):
+            parts = [p.strip() for p in line.split('->')]
+            if len(parts) == 2:
+                source, target = parts
+                nodes.add(source)
+                nodes.add(target)
+                edges.append(parts)
+
+        for node in nodes:
+            net.add_node(node, label=node, color="#2c5364", size=15)
+
+        for edge in edges:
+            net.add_edge(edge[0], edge[1], color="white")
+
+        try:
+            net.save_graph("knowledge_graph.html")
+            with open("knowledge_graph.html", "r", encoding="utf-8") as f:
+                html = f.read()
+            st.components.v1.html(html, height=520)
+        except Exception as e:
+            st.error(f"Failed to generate graph: {e}")
 
 def oracle_error_resolution():
     st.header("🔍 Oracle Error Resolution")
