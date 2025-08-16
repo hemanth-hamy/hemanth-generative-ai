@@ -32,11 +32,16 @@ header { background: transparent !important; }
 footer { visibility: hidden; }
 
 /* Neon gradient title bar */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: var(--glow), inset 0 0 40px rgba(255,255,255,.05); }
+  50% { box-shadow: 0 10px 50px rgba(99, 102, 241, 0.5), inset 0 0 50px rgba(255,255,255,.1); }
+}
 .hero {
   margin-top: .4rem; margin-bottom: 1rem; padding: 16px 22px; border-radius: 20px;
   background: linear-gradient(90deg, rgba(99,102,241,.18), rgba(236,72,153,.18));
   box-shadow: var(--glow), inset 0 0 40px rgba(255,255,255,.05);
   border: 1px solid var(--card-brd);
+  animation: pulseGlow 4s ease-in-out infinite;
 }
 
 /* Glass cards */
@@ -77,17 +82,16 @@ section[data-testid="stSidebar"] {
 @keyframes moveParticle{0%{transform:translateY(0) scale(.8)}100%{transform:translateY(-95vh) scale(1.28)}}
 
 /* Top quick-nav buttons */
-.nav-row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:.2rem 0 1rem 0}
-.nav-btn .stButton>button{
+.nav-container .stButton>button {
   border-radius:1rem;border:1px solid rgba(255,255,255,.15);
   background:linear-gradient(100deg,#191637,#27e1fa77 100%);color:#fff;
   box-shadow:0 0 18px 2px #00e9fa33;padding:.42rem .9rem;font-weight:600;
   transition:all .15s ease; font-size:.95rem;
 }
-.nav-btn .stButton>button:hover{transform:translateY(-1px) rotate(-1deg); box-shadow:0 0 40px 8px #ff27fa77;}
-.nav-btn.active .stButton>button{
-  background:linear-gradient(100deg,#27e1fa 30%,#ff27fa 100%);
+.nav-container .stButton>button:hover{
+  transform:translateY(-1px) rotate(-1deg);
   box-shadow:0 0 40px 8px #ff27fa77;
+  background:linear-gradient(100deg,#27e1fa 30%,#ff27fa 100%);
 }
 
 /* Scrollbar */
@@ -358,18 +362,15 @@ elif url_tool and url_tool in TOOLS and url_tool != st.session_state.selected_to
 
 # Quick top buttons (two rows)
 def quick_nav():
+    st.markdown('<div class="nav-container">', unsafe_allow_html=True)
     rows = [TOOLS[:6], TOOLS[6:]]
     for row in rows:
-        st.markdown('<div class="nav-row">', unsafe_allow_html=True)
         cols = st.columns(len(row), gap="small")
         for i, name in enumerate(row):
-            active = "active" if name == st.session_state.selected_tool else ""
             with cols[i]:
-                st.markdown(f'<div class="nav-btn {active}">', unsafe_allow_html=True)
-                if st.button(name, key=f"top_{name.replace(' ','_')}"):
+                if st.button(name, key=f"top_{name.replace(' ','_')}", use_container_width=True):
                     set_tool(name)
-                st.markdown("</div>", unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 quick_nav()
 
