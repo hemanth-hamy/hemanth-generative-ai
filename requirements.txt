@@ -4,3 +4,7 @@ Pillow
 openai
 youtube-transcript-api
 pyvis
+openai-whisper
+PyMuPDF
+langchain
+sentence-transformers
