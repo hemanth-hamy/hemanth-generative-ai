@@ -17,15 +17,28 @@ A futuristic Streamlit-based Immortal AI UI which works *fully offline*, but aut
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation & Deployment
 
-```bash
-pip install -r requirements.txt
-```
+### ⭐ Recommended: GitHub Codespaces (Easiest)
+The absolute best way to run this app is using **GitHub Codespaces**. This gives you a powerful and fully configured cloud-based VM right in your browser. GitHub provides a generous free tier for Codespaces.
+
+1.  Click the **"< > Code"** button at the top of this repository page.
+2.  Go to the **"Codespaces"** tab.
+3.  Click **"Create codespace on main"**.
+4.  Wait for the Codespace to build. A terminal will appear at the bottom.
+5.  In the terminal, run the following command to install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+6.  Once the installation is finished, run the app:
+    ```bash
+    streamlit run app.py
+    ```
+7.  Streamlit will automatically provide a URL to open the application in a new browser tab.
 
 ---
 
-## 🚀 Recommended Deployment (Free VM)
+### Alternative: Manual VM Setup
 Due to the large size of the AI models, this application requires significant disk space and may not run on free shared-hosting platforms like Streamlit Cloud.
 
 **The best option is to use a free Virtual Machine (VM) from a major cloud provider.** This will give you the necessary resources and full control over the environment.
